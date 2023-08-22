@@ -1,0 +1,32 @@
+body{
+    font-family: 'Slabo 27px', serif;
+    font-style: normal;
+    background-color: rgba(201, 197, 178, 0.356);
+
+}
+
+.text-center {
+    margin-top: 30px;
+    font-size: large;
+}
+
+.inputs {
+    margin-top: 90px;
+}
+
+.submit-options {
+    margin-left: 1050px;
+    margin-bottom: 20px;
+    font-size: large;
+}
+
+.SubmitOptions {
+    display: flex;
+    justify-content: center;  /* Align horizontally to the center */
+    align-items: center;      /* Align vertically to the center */
+    height: 100%;             /* Adjust this value if needed */
+}
+
+.col-lg-1 {
+    margin-left: 600px;
+}

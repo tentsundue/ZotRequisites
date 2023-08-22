@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZotRequisites</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+          rel="stylesheet" 
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap');
+    </style>
+
+
+</head>
+<body>
+  <img src="petr.png" style="width: 200px; margin-left: 100px;" class="rounded float-start" alt="Petr The Anteater Sticker">
+  <img src="petr.png" style="width: 200px; margin-right: 100px;" class="rounded float-end" alt="Petr The Anteater Sticker">
+
+    <div class="container">
+      <div class="text-center">
+        <h2>Welcome to ZotRequisites!</h2>
+        <p class="lead">Don't know if you can take a class? We are here to help!</p>
+      </div>
+      <div class="inputs">
+        <form id="entry-data">
+          <div class="row justify-content-center my-5">
+            <div class="col-lg-6" id="departments">
+              <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="depts" id="dept-select">
+                <option value="all">Dept</option>
+                <option value="ACENG">AC ENG . . . . . .Academic English</option>
+                <option value="AFAM">AFAM . . . . . . . African American Studies</option>
+                <option value="ANATOMY">ANATOMY . . . .Anatomy and Neurobiology</option>
+                <option value="ANESTH">ANESTH . . . . . Anesthesiology</option>
+                <option value="ANTHRO">ANTHRO . . . . . Anthropology</option>
+                <option value="ARABIC">ARABIC . . . . . .Arabic</option>
+                <option value="ARMN">ARMN . . . . . . .Armenian (started 2018 Spg)</option>
+                <option value="ART">ART . . . . . . . . .Art</option>
+                <option value="ARTHIS">ART HIS . . . . . .Art History</option>
+                <option value="ARTS">ARTS . . . . . . . Arts</option>
+                <option value="ARTSHUM">ARTSHUM . . . . Arts and Humanities</option>
+                <option value="ASIANAM">ASIANAM . . . . Asian American Studies</option>
+                <option value="BANA">BANA . . . . . . . Business Analytics (started 2017 SS2)</option>
+                <option value="BATS">BATS . . . . . . . Biomedical and Translational Science</option>
+                <option value="BIOSCI">BIO SCI . . . . . .Biological Sciences</option>
+                <option value="BIOCHEM">BIOCHEM . . . . Biological Chemistry</option>
+                <option value="BME">BME . . . . . . . . Biomedical Engineering</option>
+                <option value="CAMPREC">CAMPREC . . . .Campus Recreation</option>
+                <option value="CBE">CBE . . . . . . . . Chemical and Biomolecular Engineering (started 2018 Fall)</option>
+                <option  style="color: gray" value="CBEMS">CBEMS . . . . . .Chemical Engr and Materials Science (until 2019 SS2)</option>
+                <option value="CEM">CEM . . . . . . . . Community and Environmental Medicine</option>
+                <option value="CHC/LAT">CHC/LAT . . . . . Chicano Latino</option>
+                <option value="CHEM">CHEM . . . . . . .Chemistry</option>
+                <option value="CHINESE">CHINESE . . . . .Chinese</option>
+                <option value="CLASSIC">CLASSIC . . . . .Classics</option>
+                <option value="CLT&amp;THY">CLT&amp;THY . . . . .Culture &amp; Theory</option>
+                <option value="COGS">COGS . . . . . . . Cognitive Sciences </option>
+                <option value="COMLIT">COM LIT . . . . . Comparative Literature</option>
+                <option value="COMPSCI">COMPSCI . . . . Computer Science</option>
+                <option value="CRITISM">CRITISM . . . . . Criticism</option>
+                <option value="CRM/LAW">CRM/LAW . . . . Criminology, Law and Society</option>
+                <option value="CSE">CSE . . . . . . . . Computer Science and Engineering</option>
+                <option value="DANCE">DANCE . . . . . . Dance</option>
+                <option value="DATA">DATA . . . . . . . Data Science (started 2022 SS1)</option>
+                <option value="DERM">DERM . . . . . . .Dermatology</option>
+                <option value="DEVBIO">DEV BIO . . . . . Developmental and Cell Biology</option>
+                <option value="DRAMA">DRAMA . . . . . .Drama</option>
+                <option  style="color: gray" value="E ASIAN">E ASIAN . . . . . East Asian Languages and Literatures (until 2019 SS2)</option>
+                <option value="EARTHSS">EARTHSS . . . . Earth System Science</option>
+                <option value="EAS">EAS . . . . . . . . East Asian Studies (started 2019 Fall)</option>
+                <option value="ECOEVO">ECO EVO . . . . Ecology and Evolutionary Biology</option>
+                <option value="ECON">ECON . . . . . . . Economics</option>
+                <option value="ECPS">ECPS . . . . . . . Embedded and Cyber-Physical Systems</option>
+                <option value="EDAFF">ED AFF . . . . . .Educational Affairs (Sch of Med)</option>
+                <option value="EDUC">EDUC . . . . . . . Education</option>
+                <option value="EECS">EECS . . . . . . . Electrical Engineering &amp; Computer Science</option>
+                <option value="EHS">EHS . . . . . . . . Environmental Health Sciences</option>
+                <option value="ENGLISH">ENGLISH . . . . .English</option>
+                <option value="ENGR">ENGR . . . . . . . Engineering</option>
+                <option value="ENGRCEE">ENGRCEE . . . .Engineering, Civil and Environmental</option>
+                <option value="ENGRMAE">ENGRMAE . . . .Engineering, Mechanical and Aerospace</option>
+                <option  style="color: gray" value="ENGRMSE">ENGRMSE . . . .Materials Science and Engineering (until 2020 SS2)</option>
+                <option value="EPIDEM">EPIDEM . . . . . .Epidemiology</option>
+                <option value="ERMED">ER MED . . . . . Emergency Medicine</option>
+                <option value="EUROST">EURO ST . . . . .European Studies</option>
+                <option value="FAMMED">FAM MED . . . . Family Medicine</option>
+                <option value="FIN">FIN . . . . . . . . . Finance (started 2017 Fall)</option>
+                <option value="FLM&amp;MDA">FLM&amp;MDA . . . .Film and Media Studies</option>
+                <option value="FRENCH">FRENCH . . . . . French</option>
+                <option value="GDIM">GDIM . . . . . . . .Game Design and Interactive Media (started 2021 Fall)</option>
+                <option value="GEN&amp;SEX">GEN&amp;SEX . . . . Gender and Sexuality Studies</option>
+                <option value="GERMAN">GERMAN . . . . .German</option>
+                <option value="GLBLME">GLBL ME . . . . .Global Middle East Studies</option>
+                <option value="GLBLCLT">GLBLCLT . . . . .Global Cultures</option>
+                <option value="GREEK">GREEK . . . . . . Greek</option>
+                <option value="HEBREW">HEBREW . . . . .Hebrew</option>
+                <option value="HINDI">HINDI . . . . . . . .Hindi</option>
+                <option value="HISTORY">HISTORY . . . . .History</option>
+                <option value="HUMAN">HUMAN . . . . . .Humanities</option>
+                <option value="HUMARTS">HUMARTS . . . . Humanities and Arts</option>
+                <option value="I&amp;CSCI">I&amp;C SCI . . . . . . Information and Computer Science</option>
+                <option value="IN4MATX">IN4MATX . . . . . Informatics</option>
+                <option value="INNO">INNO . . . . . . . .Masters of Innovation and Entrepreneurship (started 2019 Fall)</option>
+                <option value="INTMED">INT MED . . . . . Internal Medicine</option>
+                <option value="INTLST">INTL ST . . . . . . International Studies</option>
+                <option value="IRAN">IRAN . . . . . . . .Iranian (started 2020 Fall)</option>
+                <option value="ITALIAN">ITALIAN . . . . . .Italian</option>
+                <option value="JAPANSE">JAPANSE . . . . Japanese</option>
+                <option value="KOREAN">KOREAN . . . . .Korean</option>
+                <option value="LATIN">LATIN . . . . . . . Latin</option>
+                <option value="LAW">LAW . . . . . . . . Law</option>
+                <option  style="color: gray" value="LINGUIS">LINGUIS . . . . . .Linguistics (until 2019 SS2)</option>
+                <option value="LITJRN">LIT JRN . . . . . . Literary Journalism</option>
+                <option value="LPS">LPS . . . . . . . . .Logic and Philosophy of Science</option>
+                <option value="LSCI">LSCI . . . . . . . . Language Science (started 2019 Fall)</option>
+                <option value="M&amp;MG">M&amp;MG . . . . . . .Microbiology and Molecular Genetics</option>
+                <option value="MATH">MATH . . . . . . . Mathematics</option>
+                <option value="MED">MED . . . . . . . . Medicine</option>
+                <option value="MEDED">MED ED . . . . . Medical Education</option>
+                <option value="MEDHUM">MED HUM . . . . Medical Humanities</option>
+                <option value="MGMT">MGMT . . . . . . .Management</option>
+                <option value="MGMTEP">MGMT EP . . . . Executive MBA</option>
+                <option value="MGMTFE">MGMT FE . . . . Fully Employed MBA</option>
+                <option value="MGMTHC">MGMT HC . . . . Health Care MBA</option>
+                <option value="MGMTMBA">MGMTMBA . . . Management MBA</option>
+                <option value="MGMTPHD">MGMTPHD . . . .Management PhD</option>
+                <option value="MICBIO">MIC BIO . . . . . .Microbiology</option>
+                <option value="MOLBIO">MOL BIO . . . . . Molecular Biology and Biochemistry</option>
+                <option value="MPAC">MPAC . . . . . . .Accounting</option>
+                <option value="MSE">MSE . . . . . . . . Materials Science and Engineering (started 2020 Fall)</option>
+                <option value="MUSIC">MUSIC . . . . . . .Music</option>
+                <option value="NETSYS">NET SYS . . . . .Networked Systems</option>
+                <option value="NEURBIO">NEURBIO . . . . .Neurobiology and Behavior</option>
+                <option value="NEUROL">NEUROL . . . . . Neurology</option>
+                <option value="NURSCI">NUR SCI . . . . . Nursing Science</option>
+                <option value="OB/GYN">OB/GYN . . . . . Obstetrics and Gynecology</option>
+                <option value="OPHTHAL">OPHTHAL . . . . Ophthalmology</option>
+                <option value="PATH">PATH . . . . . . . Pathology and Laboratory Medicine</option>
+                <option value="PEDGEN">PED GEN . . . . Pediatrics Genetics</option>
+                <option value="PEDS">PEDS . . . . . . . Pediatrics</option>
+                <option value="PERSIAN">PERSIAN . . . . .Persian</option>
+                <option value="PHARM">PHARM . . . . . .Pharmacology (started 2020 Fall)</option>
+                <option value="PHILOS">PHILOS . . . . . .Philosophy</option>
+                <option value="PHMD">PHMD . . . . . . .Pharmacy (started 2021 Fall)</option>
+                <option value="PHRMSCI">PHRMSCI . . . . Pharmaceutical Sciences</option>
+                <option value="PHYSCI">PHY SCI . . . . . Physical Science</option>
+                <option value="PHYSICS">PHYSICS . . . . .Physics</option>
+                <option value="PHYSIO">PHYSIO . . . . . .Physiology and Biophysics</option>
+                <option value="PLASTIC">PLASTIC . . . . . Plastic Surgery</option>
+                <option value="PM&amp;R">PM&amp;R . . . . . . .Physical Medicine and Rehabilitation</option>
+                <option value="POLSCI">POL SCI . . . . . Political Science</option>
+                <option value="PORTUG">PORTUG . . . . . Portuguese</option>
+                <option  style="color: gray" value="PP&amp;D">PP&amp;D . . . . . . . Planning, Policy, and Design (until 2018 SS2; see UPPP)</option>
+                <option value="PSCI">PSCI . . . . . . . .Psychological Science (started 2019 Fall)</option>
+                <option  style="color: gray" value="PSY BEH">PSY BEH . . . . .Psychology and Social Behavior (until 2019 SS2)</option>
+                <option value="PSYCH">PSYCH . . . . . . Cognitive Sciences</option>
+                <option value="PUBPOL">PUB POL . . . . .Public Policy</option>
+                <option value="PUBHLTH">PUBHLTH . . . . Public Health</option>
+                <option value="RADIO">RADIO . . . . . . .Radiology</option>
+                <option value="RELSTD">REL STD . . . . . Religious Studies</option>
+                <option value="ROTC">ROTC . . . . . . . Reserve Officers' Training Corps</option>
+                <option value="RUSSIAN">RUSSIAN . . . . .Russian</option>
+                <option value="SOCSCI">SOC SCI . . . . . Social Science</option>
+                <option value="SOCECOL">SOCECOL . . . . Social Ecology</option>
+                <option value="SOCIOL">SOCIOL . . . . . .Sociology</option>
+                <option value="SPANISH">SPANISH . . . . .Spanish</option>
+                <option value="SPPS">SPPS . . . . . . . Social Policy &amp; Public Service</option>
+                <option value="STATS">STATS . . . . . . .Statistics</option>
+                <option value="SURGERY">SURGERY . . . .Surgery</option>
+                <option value="SWE">SWE . . . . . . . .Software Engineering (started 2019 Fall)</option>
+                <option value="TAGALOG">TAGALOG . . . . Tagalog</option>
+                <option value="TOX">TOX . . . . . . . . .Toxicology</option>
+                <option value="UCDC">UCDC . . . . . . . UC Washington DC</option>
+                <option value="UNIAFF">UNI AFF . . . . . .University Affairs</option>
+                <option value="UNISTU">UNI STU . . . . . .University Studies</option>
+                <option value="UPPP">UPPP . . . . . . . Urban Planning and Public Policy (started 2018 Fall)</option>
+                <option value="VIETMSE">VIETMSE . . . . .Vietnamese</option>
+                <option value="VISSTD">VIS STD . . . . . .Visual Studies</option>
+                <option value="WRITING">WRITING . . . . . Writing</option>
+              </select>
+            </div>
+            <div class="col-lg-4" id="course-num">
+              <label for="class-id" class="form-label"></label>
+              <input type="text" style="margin-top: -24.3px" class="form-control form-control-lg mb-3" id="class-id" name="courseNum" placeholder="Enter Course Number (Ex: 31, 32, 33, etc)">
+            </div>
+            <div class="SubmitOptions">
+              <form id = "SubmitOptions">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="prereqs" value="option1">
+                  <label class="form-check-label" for="prereqs">Find Prerequisites</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="profs" value="option2">
+                  <label class="form-check-label" for="profs">Find Professors</label>
+                </div>
+              </form>
+            </div>
+            <div class="col-lg-2" id="submitbtn">
+              <button type="submit" class="btn btn-primary btn-md">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <div id = "result">
+        <table class = "table table-bordered" id="border-table">
+          <thead id="head">
+          </thead>
+          <tbody id="body">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+        crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+</body>
+</html>
