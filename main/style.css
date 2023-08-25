@@ -1,7 +1,6 @@
 body{
     font-family: 'Slabo 27px', serif;
     font-style: normal;
-    background-color: rgba(201, 197, 178, 0.356);
 
 }
 
@@ -25,8 +24,43 @@ body{
     justify-content: center;  /* Align horizontally to the center */
     align-items: center;      /* Align vertically to the center */
     height: 100%;             /* Adjust this value if needed */
+    margin-bottom: 10px;
 }
 
 .col-lg-1 {
     margin-left: 600px;
 }
+
+#petr {
+    width:100px;
+    position: relative;
+    left: 350px; /* moves the element 20px to the left, making it appear closer to the right */
+}
+
+#submit {
+    display: flex;
+    justify-content: center;  /* Align horizontally to the center */
+    align-items: center;      /* Align vertically to the center */
+    height: 100%;             /* Adjust this value if needed */
+    margin-left: 50px;
+}
+
+#border-table {
+    background-color: rgba(218, 212, 212, 0.185);
+    border: 2px solid black;
+    font-size: large;
+}
+
+#dept-select {
+    background-color: rgba(218, 212, 212, 0.452);
+    box-shadow: 5px 5px 10px rgba(0,0, 0, 0.15);
+    border-width: 1px;
+    color:rgb(0, 0, 0);
+    border-radius: 2px;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background-color 0.15s,
+        color 0.15s;
+}
+
+

@@ -19,11 +19,11 @@
 
 </head>
 <body>
-  <img src="petr.png" style="width: 200px; margin-right: 100px;" class="rounded float-end" alt="Petr The Anteater Sticker">
 
     <div class="container">
+      
       <div class="text-center">
-        <img id="petrLogo" src="petr.png" style="width: 200px; margin-left: 100px;" class="rounded float-start" alt="Petr The Anteater Sticker">
+        <img src="petr.png" class="rounded float-start" id="petr" alt="Petr The Anteater Sticker">
         <h2>Welcome to ZotRequisites!</h2>
         <p class="lead">Don't know if you can take a class? We are here to help!</p>
       </div>
@@ -192,16 +192,16 @@
               <form id = "SubmitOptions">
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="prereqs" value="option1">
-                  <label class="form-check-label" for="prereqs">Find Prerequisites</label>
+                  <label class="form-check-label" style="font-size: large;" for="prereqs">Find Prerequisites</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="profs" value="option2">
-                  <label class="form-check-label" for="profs">Find Professors</label>
+                  <label class="form-check-label" style="font-size: large;" for="profs">Find Professors</label>
                 </div>
               </form>
             </div>
             <div class="col-lg-2" id="submitbtn">
-              <button type="submit" class="btn btn-primary btn-md">Submit</button>
+              <button type="submit" class="btn btn-primary btn-md" id="submit">Submit</button>
             </div>
           </div>
         </form>
