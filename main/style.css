@@ -34,7 +34,7 @@ body{
 #petr {
     width:100px;
     position: relative;
-    left: 350px; /* moves the element 20px to the left, making it appear closer to the right */
+    left: 300px; /* moves the element 20px to the left, making it appear closer to the right */
 }
 
 #submit {

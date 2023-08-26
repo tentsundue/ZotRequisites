@@ -10,14 +10,27 @@ document.addEventListener('DOMContentLoaded', function() {
 function fetchDataFromAPI() {
     const courseNum = document.getElementById('class-id').value;
     const department = document.getElementById('dept-select').value;
+    
+    // Retrieving the Submit type of the radio input (prereq or prof)
+    let submitType = null;
+    let radiobtn = document.querySelectorAll('input[name="inlineRadioOptions"]');
+    for (i = 0; i < radiobtn.length; i++) {
+      if (radiobtn[i].checked) {
+        submitType = radiobtn[i];
+      }
+    }
+
+    console.log("submit Type: ", submitType.value);
+
     const dept = encodeURIComponent(department)
     let endpoint;
     endpoint = `https://api.peterportal.org/rest/v0/courses/${dept}${courseNum}`;
     fetch(endpoint)
         .then(response => response.json())
         .then(data => {
-          
-          populateTable(data);
+          if (submitType.value == "prereqs") {
+            populateTable(data);
+          }
         })
         .catch(error => console.error('Error:', error));
 }
@@ -53,7 +66,6 @@ function retrieveTableInfo(data) {
       try {
         let response = await fetch(`https://api.peterportal.org/rest/v0/instructors/${prof}`);
         let data = await response.json();
-        console.log(prof);
         return data.name;
       } catch (error) {
         console.error("Error occured with retrieving prof info: ", error);
@@ -64,7 +76,6 @@ function retrieveTableInfo(data) {
     return new Promise((resolve) => {
       Promise.all(fetchPromises).then(results => {
         professors = [...professors, ...results];  // This will contain all the professor names
-        console.log(professors);
         let info = {
           'Prerequisites': prereqs,
           'Prerequisites For': prereqs_for,
