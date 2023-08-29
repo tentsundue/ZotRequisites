@@ -38,14 +38,17 @@ function fetchDataFromAPI() {
       sortingContainer.innerHTML = '';
 
       const dept = encodeURIComponent(department)
-      endpoint = `https://api.peterportal.org/rest/v0/grades/raw?&department=${dept}&number=${courseNum}`;
-      console.log(endpoint);
-      fetch(endpoint)
-      .then(response => response.json())
-      .then(data => {
-        populateTableProfessor(data);
-      })
-        .catch(error => console.error('Error:', error));
+      if (courseNum.length > 0) {
+        endpoint = `https://api.peterportal.org/rest/v0/grades/raw?&department=${dept}&number=${courseNum}`;
+        console.log(endpoint);
+        fetch(endpoint)
+        .then(response => response.json())
+        .then(data => {
+          populateTableProfessor(data);
+        })
+          .catch(error => console.error('Error:', error));
+      }
+     
     }
     
 }
@@ -165,7 +168,8 @@ function sorting(profInfo) {
   // Sorting input Creation
   const sortInput = document.createElement('select');
   sortInput.setAttribute('id', 'sortingInput');
-
+  sortInput.setAttribute('class', 'form-select');
+  
   const defaultOption = document.createElement('option');
   defaultOption.textContent = 'Sort';
 
