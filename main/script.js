@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function fetchDataFromAPI() {
     const courseNum = document.getElementById('class-id').value;
-    const department = document.getElementById('dept-select').value;
+    let department = document.getElementById('dept-select').value;
     
     // Retrieving the Submit type of the radio input (prereq or prof)
     let submitType = null;
@@ -22,17 +22,32 @@ function fetchDataFromAPI() {
 
     console.log("submit Type: ", submitType.value);
 
-    const dept = encodeURIComponent(department)
     let endpoint;
-    endpoint = `https://api.peterportal.org/rest/v0/courses/${dept}${courseNum}`;
-    fetch(endpoint)
+    if (submitType.value == 'prereqs') {
+      department = department.replace(/\s+/g, ''); // Clearing whitespace
+      const dept = encodeURIComponent(department)
+      endpoint = `https://api.peterportal.org/rest/v0/courses/${dept}${courseNum}`;
+      fetch(endpoint)
         .then(response => response.json())
         .then(data => {
-          if (submitType.value == "prereqs") {
-            populateTable(data);
-          }
+          populateTablePrerequsite(data);
         })
+          .catch(error => console.error('Error:', error));
+    } else {
+      const sortingContainer = document.getElementById('sortingChoices');
+      sortingContainer.innerHTML = '';
+
+      const dept = encodeURIComponent(department)
+      endpoint = `https://api.peterportal.org/rest/v0/grades/raw?&department=${dept}&number=${courseNum}`;
+      console.log(endpoint);
+      fetch(endpoint)
+      .then(response => response.json())
+      .then(data => {
+        populateTableProfessor(data);
+      })
         .catch(error => console.error('Error:', error));
+    }
+    
 }
 
 function retrieveTableInfo(data) {
@@ -88,12 +103,16 @@ function retrieveTableInfo(data) {
     })
   
 }
-function populateTable(data) {
-  // const table = document.getElementById('head');
+function populateTablePrerequsite(data) {
+  const sortingContainer = document.getElementById('sortingChoices');
+  sortingContainer.innerHTML = '';
+
+  const table = document.getElementById('head');
   const tbody = document.getElementById('body');
 
   // Clearing current contents in the table
   tbody.innerHTML = '';
+  table.innerHTML = '';
   retrieveTableInfo(data).then(info =>
 
     // Loop through each key of the info object
@@ -119,16 +138,156 @@ function populateTable(data) {
         valueCell.textContent = info[key];
       }
     
-      console.log(info[key]);
       row.appendChild(valueCell);
 
       tbody.appendChild(row);
 
     })
   )
-
+}
+function getProfInfo(data) {
+  profInfo = {}; // Professor as the key, and list containing [Passing Rate, GPA, and # of classes taught] as the value
+  data.forEach(course => {
+    let total = course.gradeACount + course.gradeBCount + course.gradeCCount + course.gradeDCount + course.gradeFCount + course.gradePCount + course.gradeNPCount;
+    let passingRate = (course.gradeACount + course.gradeBCount + course.gradeCCount + course.gradePCount) / total;
+    if (course.instructor in profInfo) {
+      profInfo[course.instructor][0] += passingRate;
+      profInfo[course.instructor][1] += course.averageGPA;
+      profInfo[course.instructor][2] += 1;
+    } else {
+      profInfo[course.instructor] = [passingRate, course.averageGPA, 1];
+    }
+  })
+  return profInfo;
 }
 
+function sorting(profInfo) {
+  // Sorting input Creation
+  const sortInput = document.createElement('select');
+  sortInput.setAttribute('id', 'sortingInput');
+
+  const defaultOption = document.createElement('option');
+  defaultOption.textContent = 'Sort';
+
+  const sortByGPA = document.createElement('option')
+  sortByGPA.value = 'sortByGPA';
+  sortByGPA.textContent = 'By GPA'
+
+  const sortByPass = document.createElement('option');
+  sortByPass.value = 'sortByPass';
+  sortByPass.textContent = 'By Passing Rate';
+
+  const sortByTaught = document.createElement('option');
+  sortByTaught.value = 'sortByTaught';
+  sortByTaught.textContent = 'By Times Taught (Recently)';
+  
+  sortInput.appendChild(defaultOption);
+  sortInput.appendChild(sortByGPA);
+  sortInput.appendChild(sortByPass);
+  sortInput.appendChild(sortByTaught);
+
+  sortingChoices = document.getElementById('sortingChoices');
+  sortingChoices.appendChild(sortInput);
+
+  // Sorting Functionality
+  document.getElementById('sortingInput').addEventListener('change', function() {
+    const selected = this.value;
+
+    if (selected === 'sortByPass') {
+      // Converting into an array of [key, value] pairs
+      profInfo = Object.entries(profInfo)
+      .sort((a, b) => (b[1][0] / b[1][2]) - (a[1][0] / a[1][2])) // Sorting based on the first element in the list
+      .reduce((acc, [key, value]) => {
+          acc[key] = value;
+          return acc;
+      }, {});
+    } else if (selected == 'sortByGPA') {
+      profInfo = Object.entries(profInfo)
+      .sort((a, b) => (b[1][1] / b[1][2]) - (a[1][1] / a[1][2])) // Sorting based on the first element in the list
+      .reduce((acc, [key, value]) => {
+          acc[key] = value;
+          return acc;
+      }, {});
+    } else if (selected == 'sortByTaught') {
+      profInfo = Object.entries(profInfo)
+      .sort((a, b) => b[1][2] - a[1][2]) // Sorting based on the first element in the list
+      .reduce((acc, [key, value]) => {
+          acc[key] = value;
+          return acc;
+      }, {});
+    }
+    updateTable(profInfo);
+  })
+}
+
+function updateTable(profInfo) {
+  console.log(profInfo);
+  const tbody = document.getElementById('body');
+  tbody.innerHTML = '';
+
+  Object.entries(profInfo).forEach(([prof, info]) => {
+    rowBody = document.createElement('tr');
+
+    professor = document.createElement('td');
+    professor.textContent = prof;
+    
+    grades = document.createElement('td');
+    grades.textContent = (info[1] / info[2]).toFixed(2);
+    
+    passingRate = document.createElement('td');
+    passingRate.textContent = `${(info[0] / info[2]).toFixed(2) * 100}%`;
+
+    totalTimesTaught = document.createElement('td');
+    totalTimesTaught.textContent = info[2];
+
+    rowBody.appendChild(professor);
+    rowBody.appendChild(grades);
+    rowBody.appendChild(passingRate);
+    rowBody.appendChild(totalTimesTaught);
+    tbody.appendChild(rowBody);
+  })
+}
+function populateTableProfessor(data) {
+    profInfo = getProfInfo(data);
+    sorting(profInfo);
+    // console.log(profInfo);
+
+    const table = document.getElementById('head');
+    sortingChoices = document.getElementById('sortingChoices');
+   
+    // Clearing current contents in the table
+    table.innerHTML = '';
+
+    // Header Content
+    const rowHeader = document.createElement('tr');
+    
+    const profHeader = document.createElement('th');
+    profHeader.setAttribute('data-column', 'prof')
+    profHeader.textContent = 'Professor';
+    
+    const gradesHeader = document.createElement('th');
+    gradesHeader.setAttribute('data-column', 'avgGPA')
+    gradesHeader.textContent = 'Grades';
+
+    const passingRateHeader = document.createElement('th');
+    passingRateHeader.setAttribute('data-column','passing')
+    passingRateHeader.textContent = 'Passing Rate';
+
+    const totalTimesTaughtHeader = document.createElement('th');
+    totalTimesTaughtHeader.setAttribute('data-column', 'timesTaught')
+    totalTimesTaughtHeader.textContent = 'Total Times Taught';
+
+    rowHeader.appendChild(profHeader);
+    rowHeader.appendChild(gradesHeader);
+    rowHeader.appendChild(passingRateHeader);
+    rowHeader.appendChild(totalTimesTaughtHeader);
+    table.appendChild(rowHeader);
+
+    // Body Content
+    updateTable(profInfo);
+
+
+};
 
 
 

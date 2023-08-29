@@ -33,8 +33,8 @@ body{
 
 #petr {
     width:100px;
-    position: relative;
-    left: 300px; /* moves the element 20px to the left, making it appear closer to the right */
+    margin-left: 300px;
+    margin-right: -300px;
 }
 
 #submit {
