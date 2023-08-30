@@ -1,7 +1,12 @@
 body{
     font-family: 'Slabo 27px', serif;
     font-style: normal;
+    background-color: rgba(46, 156, 189, 0.212);
 
+}
+
+#body {
+    background-color: white;
 }
 
 .text-center {
@@ -33,8 +38,7 @@ body{
 
 #petr {
     width:100px;
-    margin-left: 300px;
-    margin-right: -300px;
+    margin-bottom: -60px;
 }
 
 #submit {
@@ -52,7 +56,7 @@ body{
 }
 
 #head {
-    background-color: rgba(111, 255, 255, 0.493);
+    background-color: rgba(46, 156, 189, 0.212)
 }
 
 #sortingChoices {
@@ -70,6 +74,10 @@ body{
     margin-left: 8px;
     transition: background-color 0.15s,
         color 0.15s;
+}
+
+#prereqsHeader {
+    width:300px;
 }
 
 

@@ -77,9 +77,6 @@ function retrieveTableInfo(data) {
     // Retrieving UCINetIDs of professors who have taught this class
     let professors = [];
     let profNetID = data.professor_history;
-    if (profNetID == "") {
-      professors = "Weird..No professors have taught this class."
-    }
     let fetchPromises = profNetID.map(async (prof) => {
       try {
         let response = await fetch(`https://api.peterportal.org/rest/v0/instructors/${prof}`);
@@ -99,7 +96,7 @@ function retrieveTableInfo(data) {
           'Prerequisites For': prereqs_for,
           'Corequisites': coreqs,
           'Last 3 Terms Offered': terms_offered,
-          'Professors': professors
+          'Professors': professors.length == 0 ? "No Professors available" : professors
         };
         resolve(info);
       })
@@ -116,38 +113,48 @@ function populateTablePrerequsite(data) {
   // Clearing current contents in the table
   tbody.innerHTML = '';
   table.innerHTML = '';
-  retrieveTableInfo(data).then(info =>
-
+  isPrereqs = true;
+  retrieveTableInfo(data).then(info => {
     // Loop through each key of the info object
+    const rowHeader = document.createElement('tr');
+    const rowBody = document.createElement('tr');
     Object.keys(info).forEach(key => {
-      const row = document.createElement('tr');
-  
       // Create a cell for the key (e.g., 'prereqs', 'coreqs', ...)
-      const keyCell = document.createElement('th');
-      keyCell.textContent = key;
-      row.appendChild(keyCell);
+      const headerContent = document.createElement('th');
+      if (isPrereqs) {
+        headerContent.setAttribute('id', 'prereqsHeader');
+      }
+      headerContent.textContent = key;
+      rowHeader.appendChild(headerContent);
 
       // Create a cell for the value associated with the key
-      const valueCell = document.createElement('td');
+      const bodyContent = document.createElement('td');
+      if (isPrereqs) {
+        bodyContent.setAttribute('id','prereqsBody');
+        isPrereqs = false;
+      }
+      
       if (Array.isArray(info[key]) && info[key].length > 0) {
-        const list = document.createElement('ul');
+        const listings = document.createElement('ul');
         info[key].forEach(item => {
             const bulletpt = document.createElement('li');
             bulletpt.textContent = item;
-            list.appendChild(bulletpt);
+            listings.appendChild(bulletpt);
         });
-        valueCell.appendChild(list);
+        bodyContent.appendChild(listings);
       } else {
-        valueCell.textContent = info[key];
+        bodyContent.textContent = info[key];
       }
     
-      row.appendChild(valueCell);
-
-      tbody.appendChild(row);
+      rowBody.appendChild(bodyContent);
+      
+      table.appendChild(rowHeader);
+      tbody.appendChild(rowBody);
 
     })
-  )
+  })
 }
+
 function getProfInfo(data) {
   profInfo = {}; // Professor as the key, and list containing [Passing Rate, GPA, and # of classes taught] as the value
   data.forEach(course => {
@@ -183,7 +190,7 @@ function sorting(profInfo) {
 
   const sortByTaught = document.createElement('option');
   sortByTaught.value = 'sortByTaught';
-  sortByTaught.textContent = 'By Times Taught (Recently)';
+  sortByTaught.textContent = 'By Times Taught';
   
   sortInput.appendChild(defaultOption);
   sortInput.appendChild(sortByGPA);
@@ -279,7 +286,7 @@ function populateTableProfessor(data) {
 
     const totalTimesTaughtHeader = document.createElement('th');
     totalTimesTaughtHeader.setAttribute('data-column', 'timesTaught')
-    totalTimesTaughtHeader.textContent = 'Total Times Taught';
+    totalTimesTaughtHeader.textContent = 'Total Times Taught (Recently)';
 
     rowHeader.appendChild(profHeader);
     rowHeader.appendChild(gradesHeader);
