@@ -1,8 +1,10 @@
-body{
-    font-family: 'Slabo 27px', serif;
+.inputs, .resultstable{
+    font-family: 'Gluten', cursive;
     font-style: normal;
-    background-color: rgba(46, 156, 189, 0.212);
+}
 
+body {
+    background-color: rgba(122, 208, 235, 0.212);
 }
 
 #body {
@@ -12,6 +14,7 @@ body{
 .text-center {
     margin-top: 30px;
     font-size: large;
+    font-family: 'Gluten', cursive;
 }
 
 .inputs {
