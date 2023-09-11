@@ -13,6 +13,17 @@ body {
     background-color: transparent;
 }
 
+#sortingInput {
+    background-color: transparent;
+    border-color: black;
+    border: 2px solid black;
+}
+
+#class-id {
+    background-color: transparent;
+    border: 2px solid black;
+}
+
 .text-center {
     margin-top: 30px;
     font-size: large;
