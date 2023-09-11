@@ -4,11 +4,13 @@
 }
 
 body {
-    background-color: rgba(122, 208, 235, 0.212);
+    background: linear-gradient(90deg, hsla(277, 79%, 84%, 1) 0%, hsla(204, 95%, 77%, 1) 100%);
+    background-size:"400% 400%";
 }
 
+
 #body {
-    background-color: white;
+    background-color: transparent;
 }
 
 .text-center {
@@ -59,7 +61,7 @@ body {
 }
 
 #head {
-    background-color: rgba(46, 156, 189, 0.212)
+    background-color:transparent
 }
 
 #sortingChoices {
